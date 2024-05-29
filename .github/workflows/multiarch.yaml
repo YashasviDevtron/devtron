@@ -35,7 +35,7 @@ jobs:
                    return
             fi
             
-             local arch=$(docker manifest inspect "alpine/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
+             local arch=$(docker manifest inspect "quay.io/devtron/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
              
              if [ $? -ne 0 ]; then
                 error_images+=("$image")
@@ -45,7 +45,7 @@ jobs:
              if !(echo "$arch" | grep -q "amd64" && (echo "$arch" | grep -q "arm64" || echo "$arch" | grep -q "arm")); then
                  echo " $image Image does not support multiarchitecture"
              else
-                 echo "$image supports multi-architecture : $arch"
+                 echo "$image supports multi-architecture: $arch"
              fi
                            }
          while read -r line; do
