@@ -31,7 +31,7 @@ jobs:
          get_image_arch() {
              local image="$1"
              image_ref=$(echo $image | sed 's/:.*//' )
-             echo "$image"
+             echo "$image_ref"
              local arch=$(docker manifest inspect "quay.io/devtron/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
              if [ $? -ne 0 ]; then
                 error_images+=("$image")
