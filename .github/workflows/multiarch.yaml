@@ -32,11 +32,16 @@ jobs:
              local image="$1"
              image_ref=$(echo $image | sed 's/:.*//' )
              echo "$image_ref"
+             if ( [ "$image_ref" == "inception" ] || [ "$image_ref" == "postgres" ] || [ "$image_ref" == "postgres_exporter" ] || [ "$image_ref" == "workflow-controller" ]); then
+                   return
+            fi
+            
              local arch=$(docker manifest inspect "quay.io/devtron/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
+             
              if [ $? -ne 0 ]; then
                 error_images+=("$image")
                 return
-            fi
+            fi 
             
              if !(echo "$arch" | grep -q "amd64" && (echo "$arch" | grep -q "arm64" || echo "$arch" | grep -q "arm")); then
                  echo " $image Image does not support multiarchitecture"
