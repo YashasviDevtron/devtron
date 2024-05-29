@@ -35,7 +35,7 @@ jobs:
                    return
             fi
             
-             local arch=$(docker manifest inspect "quay.io/devtron/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
+             local arch=$(docker manifest inspect "docker.io/devtron/$image" | jq -r '.manifests[].platform.architecture' | sort | uniq)
              
              if [ $? -ne 0 ]; then
                 error_images+=("$image")
