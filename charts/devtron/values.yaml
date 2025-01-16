@@ -439,7 +439,7 @@ devtronEnterprise:
   enabled: false
   casbin:
     registry: ""
-    image: "casbin:efc28fb2-6de0e914-462-25420"
+    image: "casbin:efc28fb2-6de0e914-462-25421"
     imagePullPolicy: IfNotPresent
     configs:
       PG_ADDR: postgresql-postgresql.devtroncd
